@@ -1,0 +1,8 @@
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/DataLoader.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/GsZoneApplication.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/controller/GameController.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/model/EloScore.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/model/Game.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/repository/EloScoreRepository.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/repository/GameRepository.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/service/GameService.java

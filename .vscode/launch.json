@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GsZoneApplication<gs-zone>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mcvteam.gs_zone.GsZoneApplication",
+            "projectName": "gs-zone",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

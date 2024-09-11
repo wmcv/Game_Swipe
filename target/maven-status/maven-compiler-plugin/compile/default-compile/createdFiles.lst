@@ -1,0 +1,8 @@
+com/mcvteam/gs_zone/controller/GameController.class
+com/mcvteam/gs_zone/repository/EloScoreRepository.class
+com/mcvteam/gs_zone/model/EloScore.class
+com/mcvteam/gs_zone/repository/GameRepository.class
+com/mcvteam/gs_zone/GsZoneApplication.class
+com/mcvteam/gs_zone/model/Game.class
+com/mcvteam/gs_zone/service/GameService.class
+com/mcvteam/gs_zone/DataLoader.class

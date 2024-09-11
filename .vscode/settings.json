@@ -1,0 +1,16 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "GS LOCAL",
+      "database": "gs_stats",
+      "password": "Piglover11",
+      "connectionTimeout": 30,
+      "username": "postgres"
+    }
+  ]
+}
