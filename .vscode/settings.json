@@ -12,5 +12,6 @@
       "connectionTimeout": 30,
       "username": "postgres"
     }
-  ]
+  ],
+  "liveServer.settings.port": 5501
 }

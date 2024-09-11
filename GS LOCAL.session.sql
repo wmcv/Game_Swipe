@@ -1,0 +1,1 @@
+\COPY games FROM '/Users/wjm/Desktop/G_gi.csv' DELIMITER ',' CSV HEADER;
