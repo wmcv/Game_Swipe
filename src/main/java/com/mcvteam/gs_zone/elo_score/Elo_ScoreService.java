@@ -1,9 +1,11 @@
 package com.mcvteam.gs_zone.elo_score;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -56,6 +58,22 @@ public class Elo_ScoreService {
     }
 
 
+
+    public List<Elo_Score> getTwoRandomEloScoresWithSimilarElo() {
+        List<Elo_Score> allScores = StreamSupport
+                .stream(elo_ScoreRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+
+        Collections.shuffle(allScores);
+        for (int i = 0; i < allScores.size() - 1; i++) {
+            Elo_Score score1 = allScores.get(i);
+            Elo_Score score2 = allScores.get(i + 1);
+            if (Math.abs(score1.getElo_Score() - score2.getElo_Score()) < 50) { // Adjust similarity threshold as needed
+                return List.of(score1, score2);
+            }
+        }
+        return List.of(); // or handle case where no similar scores are found
+    }
 
 
 

@@ -41,10 +41,12 @@ public class GameController {
         }
     }
     
-    @GetMapping("/api/games/random")
-    public List<Game> getRandomGames() {
-        return gameService.getRandomGames(2);
-    }
+    //@GetMapping("/random")
+    //public List<Game> getRandomGames() {
+     //   return gameService.getRandomGames(2);
+    //}
+
+    
 
 
 

@@ -1,0 +1,114 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%; /* Adjust this to control spacing */
+    max-width: 1200px; /* Maximum width for responsiveness */
+    position: relative;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+
+#left-button, #right-button {
+    position: fixed;
+    top: 25%;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#left-button {
+    left: 10px;
+    background-color: blue;
+}
+
+#right-button {
+    right: 10px;
+    background-color: red;
+}
+
+/* Animation classes */
+.hidden {
+    visibility: hidden;
+}
+
+.slide-up {
+    transform: translateY(-600%);
+    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+}
+
+.slide-down {
+    transform: translateY(600%);
+    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+}
+
+.offscreen-left {
+    transform: translateX(-150%);
+    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+}
+
+.offscreen-right {
+    transform: translateX(150%);
+    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+}
+
+.visible {
+    transform: translateX(0); /* Back to the original position */
+    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+}
+
+.game {
+    
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Center text horizontally */
+    position: relative;
+}
+
+.game img {
+    width: 800;
+    height: 1200;
+}
+
+
+
+.game h2 {
+    margin: 10px 0; /* Adjust spacing between image and text */
+}
+
+
+
+/*
+
+.game {
+    width: 45%; 
+    text-align: center;
+    position: relative;
+    transition: transform 1s ease-in-out; 
+}
+
+/*
+.game img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+*/

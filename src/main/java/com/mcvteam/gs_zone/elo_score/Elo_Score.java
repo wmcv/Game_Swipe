@@ -29,6 +29,14 @@ public class Elo_Score {
         this.elo_score = elo_score;
     }
 
+    public Elo_Score()
+    {
+        id = -1;
+        game_id = -1;
+        timestamp = Timestamp.valueOf("2024-09-11 23:33:0.262698");
+        elo_score = -1;
+    }
+
     public Integer getId()
     {
         return id;

@@ -1,7 +1,8 @@
 package com.mcvteam.gs_zone.game;
 
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,13 @@ public class GameService {
                     .collect(Collectors.toList());
     }
 
-    public List<Game> getRandomGames(int count) {
+
+    public Map<Integer, Game> getGamesById(Set<Integer> ids) {
+        List<Game> games = gameRepository.findAllById(ids);
+        return games.stream().collect(Collectors.toMap(Game::getId, game -> game));
+    }
+
+    /*public List<Game> getRandomGames(int count) {
         List<Game> allGames = gameRepository.findAll();
         if (allGames.size() <= count) {
             return allGames; // If there are fewer games than the count, return all of them
@@ -50,9 +57,10 @@ public class GameService {
                      .limit(count)
                      .mapToObj(allGames::get)
                      .collect(Collectors.toList());
-    }
+}*/
 
 
+    
 
 
 
