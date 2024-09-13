@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Elo Scores</title>
+    <script src="scr.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.js"
+      integrity="sha512-CWVDkca3f3uAWgDNVzW+W4XJbiC3CH84P2aWZXj+DqI6PNbTzXbl1dIzEHeNJpYSn4B6U8miSZb/hCws7FnUZA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body class="backpage">
+    <div id="chart">
+      <div id="stats-container">
+        <div class="details-container">
+          <div id="option-container">
+            <select id="gameSelect">
+              <option value="" disabled selected>Select a Game</option>
+            </select>
+          </div>
+
+          <div id="chart-container">
+            <div style="width: 700px; height: 400px">
+              <canvas id="eloChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    <script>
+      let labels = ["Q3", "Q4", "Q5", "Q5", "Q5"];
+
+      let itemData = [8771000, 10744000, 10389000, 11958000, 13757000];
+
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            data: itemData,
+            borderColor: "rgb(66, 135, 245)",
+            fill: true,
+          },
+        ],
+      };
+
+      const config = {
+        type: "line",
+        data: data,
+        options: {
+          plugins: {
+            legend: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: "Stuff",
+            },
+          },
+        },
+      };
+
+      const chart = new Chart(document.getElementById("eloChart"), config);
+    </script>
+-->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById("eloChart").getContext("2d");
+        window.myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: [],
+            datasets: [
+              {
+                label: "Elo Score Over Time",
+                data: [],
+                backgroundColor: "rgb(75, 192, 192, 0.2)",
+                borderColor: "rgb(75, 192, 192, 1)",
+                borderWidth: 1,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  align: "center",
+                  text: "Rounds",
+                  color: "black",
+                  font: {
+                    family: "Arial",
+                    size: 14,
+                    weight: "bold",
+                  },
+                  padding: {
+                    top: 10,
+                    bottom: 5,
+                    left: 0,
+                    right: 0,
+                  },
+                },
+                suggestedMin: 0,
+                suggestedMax: 8,
+                precision: 0,
+                beginAtZero: true,
+                type: "linear",
+                linear: {
+                  unit: "round",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  align: "center",
+                  text: "Elo",
+                  color: "black",
+                  font: {
+                    family: "Arial",
+                    size: 14,
+                    weight: "bold",
+                  },
+                  padding: {
+                    top: 10,
+                    bottom: 5,
+                    left: 0,
+                    right: 0,
+                  },
+                },
+                precision: 0,
+                beginAtZero: true,
+                suggestedMin: 0,
+                suggestedMax: 1200,
+              },
+            },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<!--   const config = { type: 'line', data: data, }; const labels =
+Utils.months({count: 7}); const data = { labels: labels, datasets: [{ label: 'My
+First Dataset', data: [65, 59, 80, 81, 56, 55, 40], fill: false, borderColor:
+'rgb(75, 192, 192)', tension: 0.1 }] }; -->

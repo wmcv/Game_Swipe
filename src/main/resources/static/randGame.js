@@ -1,26 +1,32 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/api/v1/elo-scores/random-pair')
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error('Error fetching Elo scores:', data.error);
-                return;
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('eloChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Elo Score',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return 'Score: ' + tooltipItem.raw;
+                        }
+                    }
+                }
             }
-
-            const game1 = data.game1;
-            const game2 = data.game2;
-
-            const container = document.querySelector('.game-container');
-            container.innerHTML = `
-                <div class="game">
-                    <img src="${game1.imageUrl}" alt="${game1.name}">
-                    <p>${game1.name}</p>
-                </div>
-                <div class="game">
-                    <img src="${game2.imageUrl}" alt="${game2.name}">
-                    <p>${game2.name}</p>
-                </div>
-            `;
-        })
-        .catch(error => console.error('Error fetching games:', error));
+        }
+    });
 });

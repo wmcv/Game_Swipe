@@ -1,5 +1,6 @@
 package com.mcvteam.gs_zone.elo_score;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -94,15 +96,72 @@ public class Elo_ScoreController {
         return Map.of(
                 "game1", Map.of(
                         "name", game1.getName(),
-                        "imageUrl", game1.getImage_Url()
+                        "imageUrl", game1.getImage_Url(),
+                        "id", game1.getId()
                 ),
                 "game2", Map.of(
                         "name", game2.getName(),
-                        "imageUrl", game2.getImage_Url()
+                        "imageUrl", game2.getImage_Url(),
+                        "id", game2.getId()
                 )
         );
     }
+
+    @GetMapping(path = "/allData/{gameId}")
+    public Map<Integer,Map<String,Object>> getElo_ScoresFromGame(@PathVariable Integer gameId) {
+        List<Elo_Score> eloScores = elo_ScoreService.getElo_ScoresFromGame(gameId);
+        
+        int i = 0;
+
+        //Map<Integer, Map<"timestamp", Timestamp, "elo_score", Integer>> myMap= new HashMap<>();
+        //Map<Timestamp, Integer> myMap = new HashMap<>();
+
+        Map<Integer, Map<String, Object>> myMap = new HashMap<>();
+
+        // Create the nested map for game1
+        //Map<String, Object> game1Map = new HashMap<>();
+        //game1Map.put("name", "Game One");
+        //game1Map.put("imageUrl", "http://example.com/image1.png");
+        //game1Map.put("id", 1);
+
+        for (Elo_Score eS : eloScores)
+        {
+            Map<String, Object> details = new HashMap<>();
+            details.put("place", i);
+            details.put("elo_score", eS.getElo_Score());
+            myMap.put(i, details);
+
+            i++;
+        }
+        return myMap;
+    }
+
+
+
+
+
+
+
+
+
+
+    @PostMapping("/update")
+    public ResponseEntity<String> updateEloScore(@RequestBody EloScoreUpdateRequest request) {
+        elo_ScoreService.updateEloScores(request.getWinnerId(), request.getLoserId());
+        return ResponseEntity.ok("Elo scores updated successfully");
+    }
+
     
+
+    @GetMapping(path ="/{gameId}")
+    public ResponseEntity<Elo_Score> getEloScore(@PathVariable Integer gameId) {
+        Elo_Score eloScore = elo_ScoreService.findLatestByGameId(gameId);
+        if (eloScore != null) {
+            return ResponseEntity.ok(eloScore);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
 }

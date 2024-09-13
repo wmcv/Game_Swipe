@@ -1,4 +1,25 @@
 /* styles.css */
+.backpage {
+    background: linear-gradient(rgb(41, 39, 39), rgb(152, 53, 180));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-style:solid;
+    border: thick solid;
+
+    /*background: url(assets/background.png);*/
+    /*background-image: url("assets/background.png"); 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    border: 2px solid;
+    margin: 3px;
+    */
+  }
+
+
+/*
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -12,8 +33,8 @@ body {
 #container {
     display: flex;
     justify-content: space-between;
-    width: 80%; /* Adjust this to control spacing */
-    max-width: 1200px; /* Maximum width for responsiveness */
+    width: 52%; 
+    max-width: 1200px; 
     position: relative;
 }
 
@@ -22,6 +43,7 @@ body {
     justify-content: space-around;
     padding: 20px;
 }
+
 
 
 #left-button, #right-button {
@@ -44,58 +66,88 @@ body {
     background-color: red;
 }
 
-/* Animation classes */
+
+
+
 .hidden {
     visibility: hidden;
 }
 
 .slide-up {
-    transform: translateY(-600%);
-    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+    transform: translateY(-350%);
+    transition: transform 0.7s ease-in-out; 
 }
 
 .slide-down {
-    transform: translateY(600%);
-    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+    transform: translateY(350%);
+    transition: transform 0.7s ease-in-out; 
 }
 
 .offscreen-left {
-    transform: translateX(-150%);
-    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
+    transform: translateX(-250%);
+    transition: transform 0.2s ease-in-out; 
 }
 
 .offscreen-right {
-    transform: translateX(150%);
-    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
-}
+    transform: translateX(250%);
+    transition: transform 0.2s ease-in-out; }
 
 .visible {
-    transform: translateX(0); /* Back to the original position */
-    transition: transform 1s ease-in-out; /* Ensure the transition duration matches */
-}
+    transform: translateX(0); 
+    transition: transform 0.7s ease-in-out; }
+
+
+
+
+
+
 
 .game {
-    
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center horizontally */
-    text-align: center; /* Center text horizontally */
+    background: linear-gradient(rgb(28, 25, 25), rgb(194, 69, 179));
+    border-style: outset;
+    border: thick solid;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; /
     position: relative;
 }
 
-.game img {
-    width: 800;
-    height: 1200;
+img {
+    max-width: 300px;
+    max-height: 400px;
+    
+    width: 300px;
+    height: 400px;
 }
 
+.game-img{
+   
+    border-style: outset;
+    border: solid;
+}
+
+.game-holder {
+    width: fit-content;
+}
+
+.game-text {
+    word-wrap: break-word;
+    width: 300px;
+    height: 60px;
+    margin: 10px 0;
+    text-align: center;
+    
+}
 
 
 .game h2 {
-    margin: 10px 0; /* Adjust spacing between image and text */
+    width: fit-content;
+    margin: 10px 0;
 }
 
 
 
-/*
+
 
 .game {
     width: 45%; 
@@ -104,11 +156,71 @@ body {
     transition: transform 1s ease-in-out; 
 }
 
-/*
+
 .game img {
     width: 100%;
     height: auto;
     display: block;
 }
 
+
+
+
+
+
+#chart-container {
+    display: flex; 
+    text-align: initial;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 2.5rem;
+    justify-content: space-around;
+}
+
+#option-container {
+    display: flex; 
+    justify-content: center;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+#stats-container {
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+    max-height: 700px;
+    width: 700px;
+    height: 700px;
+    margin: 50px 0;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+
+#gameSelect {
+    text-align: center;
+}
+
+
+
 */
+#chart-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  #chart {
+    margin: 20px 0;
+  }
+  
+  #option-container {
+    margin-bottom: 20px;
+  }
+
+  #eloChart {
+    width: 100%;
+    height: 400px; /* Increased height for better visibility */
+  }

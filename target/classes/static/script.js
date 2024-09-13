@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const game2 = document.getElementById('game2');
     const leftButton = document.getElementById('left-button');
     const rightButton = document.getElementById('right-button');
+
+
+
     fetchRandomGames();
     let animating = false; // Flag to prevent multiple clicks during animation
 
@@ -22,40 +25,54 @@ document.addEventListener('DOMContentLoaded', () => {
         addClickEvents();  // Re-enable click events after reset
     }
 
-    // Function to animate the divs out and in
+    // Function to animate the divs in/out
     function animateOutAndIn(winnerGame, loserGame, winnerDirection) {
-        
+        const winnerId = winnerGame.dataset.gameId;
+        const loserId = loserGame.dataset.gameId;
         if (animating) return; // Prevent multiple clicks during animation
         animating = true;
 
-        // Animate the winnerGame out (up) and loserGame out (down)
         winnerGame.classList.add('slide-up');
         loserGame.classList.add('slide-down');
+      
 
         setTimeout(() => {
-            // Teleport both off-screen
             winnerGame.classList.add('hidden');
             loserGame.classList.add('hidden');
             winnerGame.classList.add(winnerDirection === 'left' ? 'offscreen-left' : 'offscreen-right');
             loserGame.classList.add(winnerDirection === 'left' ? 'offscreen-right' : 'offscreen-left');
 
-            // Remove slide classes after teleporting
+     
             winnerGame.classList.remove('slide-up');
             loserGame.classList.remove('slide-down');
-            // After teleporting off-screen, slide them back in after a short delay
+            
+            //elo_score code BELOW
+            updateEloScore(winnerId, loserId)
+            .then(() => {
+            //elo_score code ABOVE
             setTimeout(() => {
                 winnerGame.classList.remove('hidden');
                 loserGame.classList.remove('hidden');
+                updateGameContent();
                 winnerGame.classList.remove('offscreen-left', 'offscreen-right');
                 loserGame.classList.remove('offscreen-left', 'offscreen-right');
+                winnerGame.classList.add('visible');
+                loserGame.classList.add('visible');
+               
 
-                // Update game content (images and titles)
-                updateGameContent();
+                
+                setTimeout(() => {
+                    winnerGame.classList.remove('visible');
+                    loserGame.classList.remove('visible');
+                
+                    
+                    // Re-enable clicks after reset
+                    resetGameDivs();
 
-                // Re-enable clicks after reset
-                resetGameDivs();
-            }, 500); // Delay before sliding back in
-        }, 1000); // Wait for 1 second before teleporting off-screen
+
+                }, 700); //slide back in speed
+              }, 200); //translate in from offscreen
+    });}, 700); //slide up/down offscren
     }
     
     function addClickEvents() {
@@ -110,15 +127,19 @@ document.addEventListener('DOMContentLoaded', () => {
 //    fetchRandomGames();
 //});
 ///random-pair
+
+
+
 function fetchRandomGames() {
     
-    fetch('/api/v1/eloscore/random-pair')  // URL should match your API endpoint
+    fetch('/api/v1/eloscore/random-pair')
         .then(response => response.json())
         .then(data => {
             if (data.error) {
                 console.error("h   "+data.error);
                 return;
             }
+
             // Update the HTML with the game data
             updateGameDisplay(data.game1, 'game1', 0);
             updateGameDisplay(data.game2, 'game2', 1);
@@ -132,6 +153,7 @@ function updateGameDisplay(gameData, elementId, duck) {
         if (duck == 0)
         {
             //console.log(url1);
+            gameElement.dataset.gameId = gameData.id;
             gId1 = gameData.id;
             game1.querySelector('img').src = gameData.imageUrl;
             game1.querySelector('h2').textContent = gameData.name;
@@ -141,6 +163,7 @@ function updateGameDisplay(gameData, elementId, duck) {
         if (duck == 1)
         {
             gId2 = gameData.id;
+            gameElement.dataset.gameId = gameData.id;
             game2.querySelector('img').src = gameData.imageUrl;
             game2.querySelector('h2').textContent = gameData.name;
             //tit2 = gameData.name;
@@ -155,4 +178,45 @@ function updateGameDisplay(gameData, elementId, duck) {
         //    <img src="${gameData.imageUrl}" alt="${gameData.name}" />
         //`;
     }
+}
+
+
+
+
+
+
+
+function fetchEloScore(gameId) {
+    return fetch(`/api/v1/eloscore/${gameId}`)
+        .then(response => response.json())
+        .then(data => data.elo_score)
+        .catch(error => console.error('Error fetching Elo score:', error));
+}
+
+function updateGameContent() {
+    // Assume that these IDs are dynamically selected
+    const leftGameId = leftGame.dataset.gameId;
+    const rightGameId = rightGame.dataset.gameId;
+
+    // Fetch current Elo scores for both games
+    Promise.all([fetchEloScore(leftGameId), fetchEloScore(rightGameId)])
+        .then(([leftElo, rightElo]) => {
+            // Update the DOM with the new game content and their Elo scores
+            document.querySelector('#left-game-elo').textContent = `Elo: ${leftElo}`;
+            document.querySelector('#right-game-elo').textContent = `Elo: ${rightElo}`;
+        })
+        .catch(error => console.error('Error updating game content:', error));
+}
+
+function updateEloScore(winnerId, loserId) {
+    return fetch('/api/v1/eloscore/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ winnerId: winnerId, loserId: loserId })
+    })
+    .then(response => response.json())
+    .then(data => console.log('Elo scores updated:', data))
+    .catch(error => console.error('Error updating Elo score:', error));
 }

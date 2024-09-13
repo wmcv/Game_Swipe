@@ -18,8 +18,12 @@ public class GsZoneApplication {
 //add way to grab id numbers from the 2RandomGames method and pass
 //them to the js file into gId1/gId2
 
+//integrate score system
+//needs the elo_score of each game before the click
+//creates new one for each after the click
 
-//fix image sizes and format so the text doesn't move everything
-// so lock <div> size?
 
-//fix the sliding in from left/right
+
+
+//add stats/ranks, maybe in hamburger menu?
+
