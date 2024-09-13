@@ -216,7 +216,30 @@ function updateEloScore(winnerId, loserId) {
         },
         body: JSON.stringify({ winnerId: winnerId, loserId: loserId })
     })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text(); // Use text() to handle empty or non-JSON responses
+    })
+    .then(text => {
+        try {
+            const data = JSON.parse(text);
+            console.log('Elo scores updated:', data);
+        } catch (e) {
+            console.error('Error parsing JSON:', e);
+        }
+    })
+    .catch(error => console.error('Error updating Elo score:', error));
+}
+    
+    
+    
+    
+    
+    /*
     .then(response => response.json())
     .then(data => console.log('Elo scores updated:', data))
     .catch(error => console.error('Error updating Elo score:', error));
 }
+    */
