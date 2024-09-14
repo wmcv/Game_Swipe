@@ -94,7 +94,7 @@ public class Elo_ScoreService {
         for (int i = 0; i < allScores.size() - 1; i++) {
             Elo_Score score1 = allScores.get(i);
             Elo_Score score2 = allScores.get(i + 1);
-            if (Math.abs(score1.getElo_Score() - score2.getElo_Score()) < 50) { // 50 reps the range of elo two games gotta be in
+            if (Math.abs(score1.getElo_Score() - score2.getElo_Score()) < 300) { // 50 reps the range of elo two games gotta be in
                 return List.of(score1, score2);
             }
         }
@@ -205,17 +205,34 @@ public class Elo_ScoreService {
     }
 
 
-
+    private Integer calEloTest(Integer currentElo, Integer opponentElo, boolean isWinner)
+    {
+        if (isWinner)
+        {
+        return (int)(currentElo*1.2);
+        }
+        else
+        {
+            return (int)(currentElo*0.8);
+        }
+    }
 
 
 
     
     private Integer calculateNewElo(Integer currentElo, Integer opponentElo, boolean isWinner) {
         Integer k = 32; // Elo constant
-        double expectedScore = 1.0 / (1.0 + Math.pow(10, (opponentElo - currentElo) / 400.0));
-        Integer score = isWinner ? 1 : 0;
-        return (int) (currentElo + k * ((double)score - expectedScore));
+        //double expectedScore = 1.0 / (1.0 + Math.pow(10, (opponentElo - currentElo) / 400.0));
+        int score = isWinner ? 1 : 0;
+
+        double Qa = Math.pow(10.0, (currentElo/350));
+        double Qb = Math.pow(10.0, (opponentElo/350));
+        double expectedScore = Qa/(Qa+Qb);
+
+        return currentElo + (int)(k*(score - expectedScore));
+        //return (int) (currentElo + k * ((double)score - expectedScore));
     }
+
     /*
     public Elo_Score findLatestByGameId(Integer gameId) {
         List<Elo_Score> scores = elo_ScoreRepository.findByGameIdOrderByTimestampDesc(gameId);
@@ -233,8 +250,20 @@ public class Elo_ScoreService {
     if (scores.isEmpty()) {
         throw new NoSuchElementException("No Elo_Score found for gameId: " + gameId);
     }
-    return scores.get(0); // Get the most recent Elo_Score
-}
+    return scores.get(0); 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

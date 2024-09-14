@@ -32,6 +32,7 @@ public interface Elo_ScoreRepository extends JpaRepository<Elo_Score, Integer>{
         @Query("SELECT e FROM Elo_Score e WHERE e.game_id = :gameId ORDER BY e.timestamp DESC")
         List<Elo_Score> findLatestByGameId(@Param("gameId") Integer gameId);
         
+        
 
 
         

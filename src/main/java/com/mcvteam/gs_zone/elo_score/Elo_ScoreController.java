@@ -150,7 +150,7 @@ public class Elo_ScoreController {
         try {
 
             System.out.println("Trying to update: " + request.getLoserId() + " " + request.getWinnerId());
-
+           
             elo_ScoreService.updateEloScores(request.getWinnerId(), request.getLoserId());
             return ResponseEntity.ok("Elo scores updated successfully.");
         } catch (Exception e) {

@@ -153,19 +153,19 @@ function updateGameDisplay(gameData, elementId, duck) {
         if (duck == 0)
         {
             //console.log(url1);
-            gameElement.dataset.gameId = 4;//gameData.id;
-            gId1 = 4;//gameData.id;
-            game1.querySelector('img').src = "";//gameData.imageUrl;
-            game1.querySelector('h2').textContent = "name1";//gameData.name;
+            gameElement.dataset.gameId = gameData.id;
+            gId1 = gameData.id;
+            game1.querySelector('img').src = gameData.imageUrl;
+            game1.querySelector('h2').textContent = gameData.name;
             //tit1 = gameData.name;
             //url1 = gameData.image_Url;
         }
         if (duck == 1)
         {
-            gId2 = 3//gameData.id;
-            gameElement.dataset.gameId = 3;//gameData.id;
-            game2.querySelector('img').src = "";//gameData.imageUrl;
-            game2.querySelector('h2').textContent = "name2"//gameData.name;
+            gId2 = gameData.id;
+            gameElement.dataset.gameId = gameData.id;
+            game2.querySelector('img').src = gameData.imageUrl;
+            game2.querySelector('h2').textContent = gameData.name;
             //tit2 = gameData.name;
             //url2 = gameData.image_Url;
         }
@@ -210,24 +210,12 @@ function updateGameContent() {
 
 function updateEloScore(winnerId, loserId) {
 
-    // try {
-    //     const response = fetch('api/v1/eloscore/update');
-    //     if (response.ok) {
-    //       console.log('Promise resolved and HTTP status is successful');
-    //       // ...do something with the response
-    //     } else {
-    //       console.error('Promise resolved but HTTP status failed');
-    //     }
-    //   } catch {
-    //     console.error('Promise rejected');
-    //   }
-
     return fetch(path='api/v1/eloscore/update', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({winnerId: 4, loserId: 5 })
+        body: JSON.stringify({winnerId: winnerId, loserId: loserId })
     })
     .then(response => {
         if (!response.ok) {

@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mcvteam.gs_zone.elo_score.Elo_ScoreService;
+
 @RestController
 @RequestMapping(path = "api/v1/game")
 public class GameController {
     private final GameService gameService;
-
+    private Elo_ScoreService elo_ScoreService;
     @Autowired
     public GameController(GameService gameService)
     {

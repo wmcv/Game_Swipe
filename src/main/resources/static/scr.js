@@ -107,31 +107,19 @@ fetch('http://localhost:8080/api/v1/game')
   document.getElementById('gameSelect').addEventListener('change', function () {
     const gameId = this.value;
     fetch(`http://localhost:8080/api/v1/eloscore/allData/${gameId}`)
-        .then(response => response.json())
-        .then(data => {
-            //console.log(data);
-            // Extract elo_scores and places from the response
-            const eloScores = [];
-            const places = [];
+      .then(response => response.json())
+      .then(data => {
+        const eloScores = [];
+        const places = [];
 
-            // Iterate over the object to extract each value
-            //if (Array.isArray(data)){
-            Object.keys(data).forEach(key => {
-                //console.log("key "+data[key]);
-                //console.log("es "+data[key].elo_score);
-                //console.log("pl "+data[key].place);
-                eloScores.push(data[key].elo_score);
-                places.push(data[key].place);
-            });
-        //}
-         //   else{console.error('Invalid data item:');}
+        Object.keys(data).forEach(key => {
+          eloScores.push(data[key].elo_score);
+          places.push(data[key].place);
+        });
 
-
-            //initializeOrUpdateChart(places, eloScores);
-            updateChart(eloScores, places)
-        })
-        //.catch(error => console.error('Error fetching data:', error));
-});
+        updateChart(eloScores, places);
+      });
+  });
 
 
 function updateChart(eloScores, places)
@@ -214,3 +202,6 @@ const chart = new Chart(ctx, {
 });
 
 */
+
+
+

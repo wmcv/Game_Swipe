@@ -13,72 +13,73 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-      }
-
-      #chart {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 80%;
-        max-width: 900px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-      }
-
-      #option-container {
-        margin-bottom: 20px;
-      }
-
-      #chart-container {
-        width: 100%;
-      }
-
-      canvas {
-        width: 100% !important;
-        height: auto !important;
-      }
-
-      .details-container {
-        text-align: center;
-      }
-    </style>
   </head>
-  <body>
+  <body class="backpage">
     <div id="chart">
-      <div id="option-container">
-        <select id="gameSelect">
-          <option value="" disabled selected>Select a Game</option>
-        </select>
-      </div>
+      <div id="stats-container">
+        <div class="details-container">
+          <div id="option-container">
+            <select id="gameSelect">
+              <option value="" disabled selected>Select a Game</option>
+            </select>
+          </div>
 
-      <div id="chart-container">
-        <canvas id="eloChart"></canvas>
+          <div id="chart-container">
+            <div style="width: 700px; height: 400px">
+              <canvas id="eloChart"></canvas>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!--
+    <script>
+      let labels = ["Q3", "Q4", "Q5", "Q5", "Q5"];
+
+      let itemData = [8771000, 10744000, 10389000, 11958000, 13757000];
+
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            data: itemData,
+            borderColor: "rgb(66, 135, 245)",
+            fill: true,
+          },
+        ],
+      };
+
+      const config = {
+        type: "line",
+        data: data,
+        options: {
+          plugins: {
+            legend: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: "Stuff",
+            },
+          },
+        },
+      };
+
+      const chart = new Chart(document.getElementById("eloChart"), config);
+    </script>
+-->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById("eloChart").getContext("2d");
         window.myChart = new Chart(ctx, {
           type: "line",
           data: {
-            labels: [], // Initially empty
+            labels: [],
             datasets: [
               {
                 label: "Elo Score Over Time",
-                data: [], // Initially empty
+                data: [],
                 backgroundColor: "rgb(75, 192, 192, 0.2)",
                 borderColor: "rgb(75, 192, 192, 1)",
                 borderWidth: 1,
@@ -102,14 +103,18 @@
                   padding: {
                     top: 10,
                     bottom: 5,
+                    left: 0,
+                    right: 0,
                   },
                 },
+                suggestedMin: 0,
+                suggestedMax: 8,
+                precision: 0,
+                beginAtZero: true,
                 type: "linear",
                 linear: {
                   unit: "round",
                 },
-                beginAtZero: true,
-                suggestedMax: 8, // Default max
               },
               y: {
                 title: {
@@ -125,8 +130,11 @@
                   padding: {
                     top: 10,
                     bottom: 5,
+                    left: 0,
+                    right: 0,
                   },
                 },
+                precision: 0,
                 beginAtZero: true,
                 suggestedMin: 0,
                 suggestedMax: 1200,
@@ -163,37 +171,11 @@
           console.error("Chart data or datasets are undefined.");
         }
       }
-
-      fetch("http://localhost:8080/api/v1/game")
-        .then((response) => response.json())
-        .then((data) => {
-          const select = document.getElementById("gameSelect");
-          data.forEach((game) => {
-            const option = document.createElement("option");
-            option.value = game.id;
-            option.text = game.name;
-            select.add(option);
-          });
-        });
-
-      document
-        .getElementById("gameSelect")
-        .addEventListener("change", function () {
-          const gameId = this.value;
-          fetch(`http://localhost:8080/api/v1/eloscore/allData/${gameId}`)
-            .then((response) => response.json())
-            .then((data) => {
-              const eloScores = [];
-              const places = [];
-
-              Object.keys(data).forEach((key) => {
-                eloScores.push(data[key].elo_score);
-                places.push(data[key].place);
-              });
-
-              updateChart(eloScores, places);
-            });
-        });
     </script>
   </body>
 </html>
+
+<!--   const config = { type: 'line', data: data, }; const labels =
+Utils.months({count: 7}); const data = { labels: labels, datasets: [{ label: 'My
+First Dataset', data: [65, 59, 80, 81, 56, 55, 40], fill: false, borderColor:
+'rgb(75, 192, 192)', tension: 0.1 }] }; -->
