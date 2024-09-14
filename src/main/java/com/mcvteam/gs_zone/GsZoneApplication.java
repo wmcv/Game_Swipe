@@ -13,6 +13,7 @@ public class GsZoneApplication {
     }
 }
 
+//table can only hold two elements of each game?
 
 
 //add way to grab id numbers from the 2RandomGames method and pass

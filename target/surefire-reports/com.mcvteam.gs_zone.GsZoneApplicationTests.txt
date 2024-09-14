@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mcvteam.gs_zone.GsZoneApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.094 s -- in com.mcvteam.gs_zone.GsZoneApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.500 s -- in com.mcvteam.gs_zone.GsZoneApplicationTests

@@ -1,6 +1,5 @@
 package com.mcvteam.gs_zone.elo_score;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,13 +148,15 @@ public class Elo_ScoreController {
     @PostMapping("/update")
     public ResponseEntity<?> updateEloScore(@RequestBody EloScoreUpdateRequest request) {
         try {
-        elo_ScoreService.updateEloScores(request.getWinnerId(), request.getLoserId());
-        return ResponseEntity.ok().body(Collections.singletonMap("status","success"));//("Elo scores updated successfully");
-    } catch (Exception e) {
-        // Log the exception and return an appropriate response
-        e.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-    }
+
+            System.out.println("Trying to update: " + request.getLoserId() + " " + request.getWinnerId());
+
+            elo_ScoreService.updateEloScores(request.getWinnerId(), request.getLoserId());
+            return ResponseEntity.ok("Elo scores updated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating Elo scores: " + e.getMessage());
+        }
     }
 
     
@@ -169,6 +170,16 @@ public class Elo_ScoreController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    // @PostMapping
+    // public ResponseEntity<Elo_Score> addingElo (@RequestBody Elo_Score elo_Score)
+    // {
+    //     Elo_Score newElo_Score = elo_ScoreService.addElo_Score(elo_Score);
+    //     return new ResponseEntity<>(newElo_Score, HttpStatus.CREATED);
+    // }
+
+
 
 
 }

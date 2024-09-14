@@ -8,18 +8,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 @Entity
 @Table(name="elo_score")
 public class Elo_Score {
     
+    //@Transient
+    @Column(name = "game_id")
+    private Integer game_id;
+    @Column(name = "timestamp", unique = true)
+    private Timestamp timestamp;
+    //@Transient
+    @Column(name = "elo_score")
+    private Integer elo_score;
+
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private final Integer game_id;
-    private final Timestamp timestamp;
-    private final Integer elo_score;
+    
 
     //public Elo_Score()
     //{
@@ -34,10 +42,6 @@ public class Elo_Score {
 
     public Elo_Score()
     {
-        id = -1;
-        game_id = -1;
-        timestamp = Timestamp.valueOf("2024-09-11 23:33:0.262698");
-        elo_score = -1;
     }
 
     public Integer getId()
@@ -59,6 +63,26 @@ public class Elo_Score {
     {
         return elo_score;
     }
+    
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
 
+
+    public void setGame_Id(Integer game_id)
+    {
+        this.game_id = game_id;
+    }
+
+    public void setTimeStamp(Timestamp timestamp)
+    {
+        this.timestamp = timestamp;
+    }
+
+    public void setElo_Score(Integer elo_score)
+    {
+        this.elo_score = elo_score;
+    }
 
 }

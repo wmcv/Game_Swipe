@@ -1,4 +1,5 @@
 /Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/GsZoneApplication.java
+/Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/elo_score/EloScoreUpdateRequest.java
 /Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/elo_score/Elo_Score.java
 /Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/elo_score/Elo_ScoreController.java
 /Users/wjm/Documents/GitHub/gameslider-zone/src/main/java/com/mcvteam/gs_zone/elo_score/Elo_ScoreRepository.java

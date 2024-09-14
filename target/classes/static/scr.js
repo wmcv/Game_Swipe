@@ -117,9 +117,9 @@ fetch('http://localhost:8080/api/v1/game')
             // Iterate over the object to extract each value
             //if (Array.isArray(data)){
             Object.keys(data).forEach(key => {
-                console.log("key "+data[key]);
-                console.log("es "+data[key].elo_score);
-                console.log("pl "+data[key].place);
+                //console.log("key "+data[key]);
+                //console.log("es "+data[key].elo_score);
+                //console.log("pl "+data[key].place);
                 eloScores.push(data[key].elo_score);
                 places.push(data[key].place);
             });

@@ -7,5 +7,6 @@ com/mcvteam/gs_zone/game/Optional.class
 com/mcvteam/gs_zone/game/Game.class
 com/mcvteam/gs_zone/game/GameController.class
 com/mcvteam/gs_zone/game/GameRepository.class
+com/mcvteam/gs_zone/elo_score/EloScoreUpdateRequest.class
 temp.class
 com/mcvteam/gs_zone/elo_score/Elo_Score.class
