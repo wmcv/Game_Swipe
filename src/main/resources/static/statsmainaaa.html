@@ -17,42 +17,32 @@
       body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-
-      .container {
-        display: flex;
-        width: 90%;
-        max-width: 1200px;
-        height: 80%;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      #chart-container {
-        flex: 2;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
-        box-sizing: border-box;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
       }
 
-      #ranking-container {
-        flex: 1;
+      #chart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        max-width: 900px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px;
-        box-sizing: border-box;
-        border-left: 2px solid #ddd;
-        background-color: #fafafa;
       }
 
       #option-container {
         margin-bottom: 20px;
+      }
+
+      #chart-container {
+        width: 100%;
       }
 
       canvas {
@@ -60,39 +50,21 @@
         height: auto !important;
       }
 
-      .ranking-list {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .ranking-list-item {
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        margin-bottom: 10px;
-        padding: 10px;
-        font-size: 16px;
+      .details-container {
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div id="chart-container">
-        <div id="option-container">
-          <select id="gameSelect">
-            <option value="" disabled selected>Select a Game</option>
-          </select>
-        </div>
-
-        <canvas id="eloChart"></canvas>
+    <div id="chart">
+      <div id="option-container">
+        <select id="gameSelect">
+          <option value="" disabled selected>Select a Game</option>
+        </select>
       </div>
 
-      <div id="ranking-container">
-        <h2>Top Games</h2>
-        <ul class="ranking-list">
-          <!-- Ranking items will be populated here dynamically -->
-        </ul>
+      <div id="chart-container">
+        <canvas id="eloChart"></canvas>
       </div>
     </div>
 
@@ -204,11 +176,23 @@
           });
         });
 
-      // Example usage of updateRankingList with mock data
-      fetch("http://localhost:8080/api/v1/topten") // Replace with actual endpoint if different
-        .then((response) => response.json())
-        .then((data) => {
-          updateRankingList(data);
+      document
+        .getElementById("gameSelect")
+        .addEventListener("change", function () {
+          const gameId = this.value;
+          fetch(`http://localhost:8080/api/v1/eloscore/allData/${gameId}`)
+            .then((response) => response.json())
+            .then((data) => {
+              const eloScores = [];
+              const places = [];
+
+              Object.keys(data).forEach((key) => {
+                eloScores.push(data[key].elo_score);
+                places.push(data[key].place);
+              });
+
+              updateChart(eloScores, places);
+            });
         });
     </script>
   </body>

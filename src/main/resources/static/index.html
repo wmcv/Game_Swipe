@@ -6,6 +6,26 @@
     <title>Game Swipe</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
+    <style>
+      .top-left-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: #4caf50; /* Green */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .top-left-button:hover {
+        background-color: #45a049;
+      }
+    </style>
   </head>
   <body class="backpage">
     <section id="homepage">
@@ -32,9 +52,7 @@
         </div>
       </div>
     </div>
-
-    <button id="left-button">Statistics</button>
-    <button id="right-button">Rankings</button>
+    <a href="http://18.218.0.124:80/stats.html" class="top-left-button">View Stats</a>
 
     <script src="script6.js"></script>
   </body>

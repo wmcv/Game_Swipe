@@ -31,8 +31,44 @@ public interface Elo_ScoreRepository extends JpaRepository<Elo_Score, Integer>{
 
         @Query("SELECT e FROM Elo_Score e WHERE e.game_id = :gameId ORDER BY e.timestamp DESC")
         List<Elo_Score> findLatestByGameId(@Param("gameId") Integer gameId);
-        
-        
+
+
+
+
+        /*
+        @Query(value = "WITH latest_editions AS (" +
+        "    SELECT e.game_id, MAX(e.timestamp) AS latest_timestamp " +
+        "    FROM elo_score e " +
+        "    GROUP BY e.game_id " +
+        "), latest_games AS (" +
+        "    SELECT e.game_id, e.elo_score " +
+        "    FROM elo_score e " +
+        "    JOIN latest_editions le ON e.game_id = le.game_id " +
+        "    AND e.timestamp = le.latest_timestamp " +
+        ") " +
+        "SELECT e.game_id, e.elo_score " +
+        "FROM latest_games e " +
+        "ORDER BY e.elo_score DESC " +
+        "LIMIT 10", nativeQuery = true)
+        List<Integer[]> findTop10GamesByEloScore();
+        */
+
+        @Query(value = "WITH latest_editions AS (" +
+            "    SELECT e.game_id, MAX(e.timestamp) AS latest_timestamp " +
+            "    FROM elo_score e " +
+            "    GROUP BY e.game_id " +
+            "), latest_games AS (" +
+            "    SELECT e.game_id, e.elo_score " +
+            "    FROM elo_score e " +
+            "    JOIN latest_editions le ON e.game_id = le.game_id " +
+            "    AND e.timestamp = le.latest_timestamp " +
+            ") " +
+            "SELECT g.name, lg.elo_score " +
+            "FROM latest_games lg " +
+            "JOIN games g ON lg.game_id = g.id " +
+            "ORDER BY lg.elo_score DESC " +
+            "LIMIT 10", nativeQuery = true)
+            List<Object[]> findTop10GamesByEloScore();
 
 
         

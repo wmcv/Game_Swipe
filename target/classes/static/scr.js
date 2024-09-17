@@ -92,6 +92,7 @@ var myChart = document.getElementById('eloChart'),
 
 
 
+
 fetch('http://localhost:8080/api/v1/game')
   .then(response => response.json())
   .then(data => {
@@ -103,6 +104,8 @@ fetch('http://localhost:8080/api/v1/game')
       select.add(option);
     });
   });
+
+  
 
   document.getElementById('gameSelect').addEventListener('change', function () {
     const gameId = this.value;

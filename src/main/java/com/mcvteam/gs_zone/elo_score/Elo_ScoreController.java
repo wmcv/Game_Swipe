@@ -137,6 +137,20 @@ public class Elo_ScoreController {
     }
 
 
+    @GetMapping(path = "/topten")
+    public List<Object[]> findTheTop10GamesByEloScore() {
+        return elo_ScoreService.getTheTopTen();
+    }
+
+
+
+
+
+
+    //findTop10GamesByEloScore
+    
+
+
 
 
 

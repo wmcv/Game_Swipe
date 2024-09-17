@@ -215,7 +215,8 @@ function updateEloScore(winnerId, loserId) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({winnerId: winnerId, loserId: loserId })
+        //body: JSON.stringify({winnerId: winnerId, loserId: loserId })
+        body: JSON.stringify({winnerId: 3, loserId: 4 })
     })
     .then(response => {
         if (!response.ok) {

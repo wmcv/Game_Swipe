@@ -103,6 +103,17 @@ public class Elo_ScoreService {
 
 
 
+    public List<Object[]> getTheTopTen()
+    {
+        List<Object[]> allTopTen = elo_ScoreRepository.findTop10GamesByEloScore();
+        return allTopTen;
+    }
+
+
+
+
+
+
     /*
     public void updateEloScores(int winnerId, int loserId) {
         // Fetch the current Elo scores for both games
