@@ -45,11 +45,50 @@ body {
     position: relative;
 }
 
+/*
 .game-container {
     display: flex;
     justify-content: space-around;
     padding: 20px;
 }
+
+.game-img{
+    border-style: outset;
+    border: thick solid;
+}
+
+.game-holder {
+    width: fit-content;
+}
+*/
+
+
+.game-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    border-radius: 4px;
+  }
+  
+  /* Ensure the game container is responsive and contains its content */
+  .game-container {
+    width: 100%;
+    max-width: 300px; /* Adjust based on your design needs */
+    margin: 0 auto;
+    overflow: hidden; /* Ensures content does not overflow */
+  }
+  
+  /* Ensure game holder adjusts with content */
+  .game-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    margin-bottom: 10px;
+  }
+
+
+
+
 
 
 
@@ -130,16 +169,7 @@ img {
     height: 400px;
 }
 
-.game-img{
-    border-style: outset;
-    border: thick solid;
-    /* width: 800;
-    height: 1200; */
-}
 
-.game-holder {
-    width: fit-content;
-}
 
 .game-text {
     word-wrap: break-word;

@@ -1,0 +1,128 @@
+/* styles.css */
+.backpage {
+    background: linear-gradient(rgb(41, 39, 39), rgb(152, 53, 180));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-style: solid;
+    border: thick solid;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+    padding: 0 10px;
+}
+
+.game-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Limit the maximum width of game-holder */
+    margin: 0 auto;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px; /* Limit width to make it smaller */
+    margin: 0 auto;
+    overflow: hidden; /* Hide overflow if necessary */
+}
+
+.game {
+    background: linear-gradient(rgb(28, 25, 25), rgb(194, 69, 179));
+    border-style: outset;
+    border: thick solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+/* Ensuring images fit well */
+.game-img {
+    max-width: 100%; /* Scale down to fit the container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 300px; /* Limit the height of images */
+    border-radius: 4px;
+}
+
+/* Button styles */
+#left-button, #right-button {
+    position: fixed;
+    top: 25%;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#left-button {
+    left: 10px;
+    background-color: blue;
+}
+
+#right-button {
+    right: 10px;
+    background-color: red;
+}
+
+/* Animation classes */
+.hidden {
+    visibility: hidden;
+}
+
+.slide-up {
+    transform: translateY(-350%);
+    transition: transform 0.7s ease-in-out;
+}
+
+.slide-down {
+    transform: translateY(350%);
+    transition: transform 0.7s ease-in-out;
+}
+
+.offscreen-left {
+    transform: translateX(-250%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.offscreen-right {
+    transform: translateX(250%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.visible {
+    transform: translateX(0);
+    transition: transform 0.7s ease-in-out;
+}
+
+/* Text styling */
+.game-text {
+    word-wrap: break-word;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px 0;
+    text-align: center;
+}

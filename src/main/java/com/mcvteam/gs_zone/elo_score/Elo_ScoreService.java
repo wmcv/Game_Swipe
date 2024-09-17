@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-
 @Component
 @Service
 public class Elo_ScoreService {
@@ -26,7 +26,7 @@ public class Elo_ScoreService {
     private EntityManager entityManager;
     //@Autowired
    // private GameRepository gameRepository;
-
+    private Random rand = new Random();
 
     @Autowired
     public Elo_ScoreService(Elo_ScoreRepository elo_ScoreRepository)
@@ -87,13 +87,13 @@ public class Elo_ScoreService {
 
     public List<Elo_Score> getTwoRandomEloScoresWithSimilarElo() {
         List<Elo_Score> allScores = StreamSupport
-                .stream(elo_ScoreRepository.findAll().spliterator(), false)
+                .stream(elo_ScoreRepository.findLatestScoresForAllGames().spliterator(), false)
                 .collect(Collectors.toList());
 
         Collections.shuffle(allScores);
         for (int i = 0; i < allScores.size() - 1; i++) {
-            Elo_Score score1 = allScores.get(i);
-            Elo_Score score2 = allScores.get(i + 1);
+            Elo_Score score1 = allScores.get(rand.nextInt(allScores.size()));
+            Elo_Score score2 = allScores.get(rand.nextInt(allScores.size()));
             if (Math.abs(score1.getElo_Score() - score2.getElo_Score()) < 300) { // 50 reps the range of elo two games gotta be in
                 return List.of(score1, score2);
             }

@@ -139,10 +139,15 @@ function fetchRandomGames() {
                 console.error("h   "+data.error);
                 return;
             }
-
-            // Update the HTML with the game data
+            if (data.game1.id !== data.game2.id)
+            {
             updateGameDisplay(data.game1, 'game1', 0);
             updateGameDisplay(data.game2, 'game2', 1);
+            }
+            else
+            {
+                fetchRandomGames();
+            }
         })
         .catch(error => console.error('Error fetching data:', error));
 }
