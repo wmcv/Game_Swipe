@@ -56,7 +56,9 @@
 
       canvas {
         width: 100% !important;
-        height: auto !important;
+        /*height: auto !important;*/
+        height: 80%;
+        /*display: block;*/
       }
 
       .ranking-list {
@@ -145,6 +147,8 @@
             ],
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: true,
             scales: {
               x: {
                 title: {
